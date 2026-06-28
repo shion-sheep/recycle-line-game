@@ -114,3 +114,38 @@ button:disabled {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+.item.selected {
+  background: #fff6cc;
+  border-color: #f0a500;
+  transform: scale(1.05);
+}
+
+.bin.selected-target {
+  border-color: #f0a500;
+  box-shadow: 0 0 0 4px rgba(240, 165, 0, 0.2);
+}
+
+@media (max-width: 700px) {
+  .game {
+    padding: 16px;
+  }
+
+  .game-area {
+    height: 180px;
+  }
+
+  .item {
+    width: 130px;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .bin {
+    min-height: 90px;
+    font-size: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
