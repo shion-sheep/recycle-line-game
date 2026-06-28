@@ -458,3 +458,173 @@ body::after {
     font-size: 12px;
   }
 }
+
+/* ===== スマホ版：プレイしやすいコンパクト表示 ===== */
+
+@media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .game {
+    width: calc(100% - 16px);
+    max-width: none;
+    margin: 8px auto;
+    padding: 12px 10px;
+    border-radius: 18px;
+  }
+
+  .title-area {
+    margin-bottom: 8px;
+  }
+
+  .title-area h1 {
+    font-size: clamp(22px, 6vw, 28px);
+    line-height: 1.15;
+    margin: 4px 0 8px;
+    word-break: keep-all;
+  }
+
+  .title-area p {
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .status-area {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 12px 0;
+  }
+
+  .status-area div {
+    padding: 8px 4px;
+    font-size: 11px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .game-area {
+    height: 128px;
+    margin: 12px 0;
+    border-width: 3px;
+    border-radius: 16px;
+
+    /* スクロール時も資源物を見失いにくくする */
+    position: sticky;
+    top: 8px;
+    z-index: 5;
+  }
+
+  .game-area::before {
+    top: 8px;
+    left: 12px;
+    font-size: 11px;
+  }
+
+  .item {
+    width: 120px;
+    padding: 12px 10px;
+    border-radius: 14px;
+    border-width: 3px;
+    font-size: 14px;
+    box-shadow: 0 5px 0 #d5e8db, 0 8px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  .item-icon {
+    font-size: 28px;
+    margin-bottom: 2px;
+  }
+
+  .item-name {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .bins {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .bin {
+    min-height: 58px;
+    padding: 6px 4px;
+    border-width: 3px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.25;
+    box-shadow: 0 4px 0 #d4d4d4, 0 7px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .message-area {
+    padding: 6px 8px;
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+    min-height: 34px;
+  }
+
+  .button-area {
+    margin-top: 8px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px 20px;
+  }
+
+  .result-card {
+    padding: 12px;
+    margin-top: 8px;
+  }
+
+  .result-title {
+    font-size: 16px;
+  }
+
+  .result-rate {
+    font-size: 16px;
+  }
+
+  .result-rank {
+    font-size: 18px;
+  }
+
+  .result-detail,
+  .result-message {
+    font-size: 13px;
+  }
+}
+
+/* ===== かなり小さいスマホ向け ===== */
+
+@media (max-width: 390px) {
+  .title-area h1 {
+    font-size: 21px;
+  }
+
+  .title-area p {
+    font-size: 12px;
+  }
+
+  .status-area div {
+    font-size: 10px;
+    padding: 7px 2px;
+  }
+
+  .game-area {
+    height: 116px;
+  }
+
+  .item {
+    width: 110px;
+    padding: 10px 8px;
+  }
+
+  .bin {
+    min-height: 52px;
+    font-size: 12px;
+  }
+}
