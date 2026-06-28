@@ -39,6 +39,9 @@ let timeLeft = 30;
 let timer = null;
 let isPlaying = false;
 
+// スマホ用：アイテムが選択されているかどうか
+let isItemSelected = false;
+
 const itemElement = document.getElementById("item");
 const scoreElement = document.getElementById("score");
 const correctElement = document.getElementById("correct");
@@ -54,11 +57,15 @@ function startGame() {
   miss = 0;
   timeLeft = 30;
   isPlaying = true;
+  isItemSelected = false;
 
   updateStatus();
-  startButton.disabled = true;
-  messageElement.textContent = "正しい回収ボックスにドラッグしよう！";
 
+  startButton.disabled = true;
+  startButton.textContent = "プレイ中";
+  messageElement.textContent = "PCはドラッグ、スマホは資源物をタップしてから回収ボックスをタップ！";
+
+  itemElement.classList.remove("selected");
   showRandomItem();
 
   timer = setInterval(() => {
@@ -73,6 +80,7 @@ function startGame() {
 
 function endGame() {
   isPlaying = false;
+  isItemSelected = false;
   clearInterval(timer);
 
   const total = correct + miss;
@@ -80,6 +88,12 @@ function endGame() {
 
   itemElement.textContent = "終了！";
   itemElement.draggable = false;
+  itemElement.classList.remove("selected");
+
+  bins.forEach((bin) => {
+    bin.classList.remove("selected-target");
+    bin.classList.remove("drag-over");
+  });
 
   messageElement.textContent =
     `結果：スコア ${score}点 / 資源化率 ${recycleRate}% / 正解 ${correct} / ミス ${miss}`;
@@ -94,6 +108,13 @@ function showRandomItem() {
 
   itemElement.textContent = currentItem.name;
   itemElement.draggable = true;
+
+  isItemSelected = false;
+  itemElement.classList.remove("selected");
+
+  bins.forEach((bin) => {
+    bin.classList.remove("selected-target");
+  });
 }
 
 function updateStatus() {
@@ -103,12 +124,54 @@ function updateStatus() {
   timeElement.textContent = timeLeft;
 }
 
+function judgeAnswer(selectedType) {
+  if (!isPlaying || !currentItem) return;
+
+  if (selectedType === currentItem.type) {
+    score += 10;
+    correct++;
+    messageElement.textContent = `正解！ ${currentItem.explanation}`;
+  } else {
+    miss++;
+    score = Math.max(0, score - 5);
+    messageElement.textContent = `惜しい！ ${currentItem.explanation}`;
+  }
+
+  updateStatus();
+  showRandomItem();
+}
+
+// PC向け：ドラッグ開始
 itemElement.addEventListener("dragstart", (event) => {
   if (!isPlaying) return;
   event.dataTransfer.setData("text/plain", currentItem.type);
 });
 
+// スマホ向け：資源物をタップして選択
+itemElement.addEventListener("click", () => {
+  if (!isPlaying) return;
+
+  isItemSelected = !isItemSelected;
+
+  if (isItemSelected) {
+    itemElement.classList.add("selected");
+    messageElement.textContent = "入れたい回収ボックスをタップしてください。";
+
+    bins.forEach((bin) => {
+      bin.classList.add("selected-target");
+    });
+  } else {
+    itemElement.classList.remove("selected");
+    messageElement.textContent = "資源物をタップして選択してください。";
+
+    bins.forEach((bin) => {
+      bin.classList.remove("selected-target");
+    });
+  }
+});
+
 bins.forEach((bin) => {
+  // PC向け：ドラッグ中
   bin.addEventListener("dragover", (event) => {
     event.preventDefault();
     bin.classList.add("drag-over");
@@ -118,6 +181,7 @@ bins.forEach((bin) => {
     bin.classList.remove("drag-over");
   });
 
+  // PC向け：ドロップ判定
   bin.addEventListener("drop", (event) => {
     event.preventDefault();
     bin.classList.remove("drag-over");
@@ -125,19 +189,20 @@ bins.forEach((bin) => {
     if (!isPlaying) return;
 
     const selectedType = bin.dataset.type;
+    judgeAnswer(selectedType);
+  });
 
-    if (selectedType === currentItem.type) {
-      score += 10;
-      correct++;
-      messageElement.textContent = `正解！ ${currentItem.explanation}`;
-    } else {
-      miss++;
-      score = Math.max(0, score - 5);
-      messageElement.textContent = `惜しい！ ${currentItem.explanation}`;
+  // スマホ向け：回収ボックスをタップして判定
+  bin.addEventListener("click", () => {
+    if (!isPlaying) return;
+
+    if (!isItemSelected) {
+      messageElement.textContent = "先に資源物をタップして選択してください。";
+      return;
     }
 
-    updateStatus();
-    showRandomItem();
+    const selectedType = bin.dataset.type;
+    judgeAnswer(selectedType);
   });
 });
 
