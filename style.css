@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #f4f8f5;
+  color: #222;
+}
+
+.game {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.title-area h1 {
+  margin-bottom: 8px;
+}
+
+.status-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.status-area div {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.game-area {
+  height: 220px;
+  background: #dfeee3;
+  border: 3px dashed #8abf9b;
+  border-radius: 16px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  width: 150px;
+  padding: 18px;
+  background: white;
+  border: 3px solid #4c9f70;
+  border-radius: 16px;
+  font-weight: bold;
+  cursor: grab;
+  user-select: none;
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+.bins {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.bin {
+  min-height: 100px;
+  background: white;
+  border: 3px solid #555;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.bin.drag-over {
+  background: #fff6cc;
+  transform: scale(1.03);
+}
+
+.message-area {
+  min-height: 40px;
+  font-weight: bold;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 999px;
+  background: #2f8f5b;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .status-area {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bins {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

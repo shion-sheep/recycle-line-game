@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>資源を救え！リサイクルライン</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game">
+    <section class="title-area">
+      <h1>資源を救え！リサイクルライン</h1>
+      <p>流れてくる資源物を、正しい回収ボックスに入れよう！</p>
+    </section>
+
+    <section class="status-area">
+      <div>スコア：<span id="score">0</span></div>
+      <div>残り時間：<span id="time">30</span>秒</div>
+      <div>正解数：<span id="correct">0</span></div>
+      <div>ミス：<span id="miss">0</span></div>
+    </section>
+
+    <section class="game-area">
+      <div id="item" class="item" draggable="true">ペットボトル</div>
+    </section>
+
+    <section class="bins">
+      <div class="bin" data-type="pet">ペットボトル</div>
+      <div class="bin" data-type="can">缶</div>
+      <div class="bin" data-type="paper">古紙</div>
+      <div class="bin" data-type="burnable">燃えるごみ</div>
+    </section>
+
+    <section class="message-area">
+      <p id="message">スタートを押してゲーム開始！</p>
+    </section>
+
+    <section class="button-area">
+      <button id="startButton">スタート</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
