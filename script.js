@@ -133,7 +133,17 @@ const missElement = document.getElementById("miss");
 const timeElement = document.getElementById("time");
 const messageElement = document.getElementById("message");
 const startButton = document.getElementById("startButton");
+const howToArea = document.getElementById("howToArea");
 const bins = document.querySelectorAll(".bin");
+const gameSections = document.querySelectorAll(".status-area, .game-area, .bins, .message-area");
+
+function showGameScreen() {
+  howToArea.classList.add("is-hidden");
+
+  gameSections.forEach((section) => {
+    section.classList.remove("is-hidden");
+  });
+}
 
 function startGame() {
   score = 0;
@@ -143,6 +153,7 @@ function startGame() {
   isPlaying = true;
   isItemSelected = false;
 
+  showGameScreen();
   updateStatus();
 
   startButton.disabled = true;
