@@ -13,18 +13,28 @@
       <p>流れてくる資源物を、正しい回収ボックスに入れよう！</p>
     </section>
 
-    <section class="status-area">
+    <section id="howToArea" class="how-to-area">
+      <h2>遊び方</h2>
+      <ol>
+        <li>資源物カードをタップ</li>
+        <li>正しい回収ボックスをタップ</li>
+        <li>30秒でできるだけ多く分別しよう</li>
+        <li>最後に資源化率とランクが出ます</li>
+      </ol>
+    </section>
+
+    <section class="status-area is-hidden">
       <div>スコア：<span id="score">0</span></div>
       <div>残り時間：<span id="time">30</span>秒</div>
       <div>正解数：<span id="correct">0</span></div>
       <div>ミス：<span id="miss">0</span></div>
     </section>
 
-    <section class="game-area">
+    <section class="game-area is-hidden">
       <div id="item" class="item" draggable="true">ペットボトル</div>
     </section>
 
-    <section class="bins">
+    <section class="bins is-hidden">
   <div class="bin" data-type="pet">ペットボトル</div>
   <div class="bin" data-type="can">缶</div>
   <div class="bin" data-type="bottle">びん</div>
@@ -37,12 +47,12 @@
   <div class="bin" data-type="burnable">燃えるごみ</div>
 </section>
 
-    <section class="message-area">
+    <section class="message-area is-hidden">
       <p id="message">スタートを押してゲーム開始！</p>
     </section>
 
     <section class="button-area">
-      <button id="startButton">スタート</button>
+      <button id="startButton">ゲームを始める</button>
     </section>
   </main>
 
